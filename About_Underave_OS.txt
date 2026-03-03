@@ -1,0 +1,160 @@
+ABOUT UNDERAVE OS
+
+What is Underave OS?
+
+Underave OS is an experimental ultra-light Windows rebuild focused on
+extreme minimalism, performance reduction, and system footprint control.
+It is designed as a technical exploration into how lightweight a modern
+Windows environment can become while still remaining usable and
+functional.
+
+Underave is not designed to be balanced. It is not designed to be
+enterprise-ready. It is designed to be reduced.
+
+The goal is clarity through subtraction.
+
+Core Philosophy
+
+Underave follows a strict reduction-first philosophy:
+
+    Remove everything non-essential.
+    Preserve only what enables core functionality.
+
+Unlike structured ecosystem projects that prioritize stability and
+long-term servicing models, Underave deliberately pushes boundaries. It
+explores what happens when system components are aggressively trimmed,
+services are minimized, and consumer-facing layers are stripped down.
+
+Minimalism is not treated as aesthetic. It is treated as architectural
+discipline.
+
+Design Objectives
+
+Underave OS focuses on:
+
+-   Extremely low idle memory usage
+-   Reduced process count
+-   Minimal startup overhead
+-   Lower background task density
+-   Clean deployment baseline
+
+The system is rebuilt at image level, not modified after installation.
+This ensures the operating environment starts from a reduced state
+rather than being modified dynamically at runtime.
+
+Every removal decision is intentional.
+
+Intended Audience
+
+Underave OS is designed for:
+
+-   Advanced users
+-   System experimenters
+-   Performance enthusiasts
+-   Minimalist hardware setups
+-   Users running low-memory configurations
+-   Virtual machine environments
+-   Testing and lab deployments
+
+It is not recommended for:
+
+-   Enterprise production environments
+-   Mission-critical infrastructure
+-   Users unfamiliar with system recovery procedures
+
+Underave assumes technical awareness.
+
+Optimization Strategy
+
+Underave applies aggressive optimization strategies, including:
+
+-   Deep component trimming (non-essential packages removed)
+-   Service startup reduction
+-   Consumer feature elimination
+-   Default configuration tuning at deployment stage
+-   Reduced background telemetry footprint (where possible within system
+    boundaries)
+
+However, the system does not:
+
+-   Modify Windows kernel binaries
+-   Bypass activation mechanisms
+-   Break driver signature enforcement
+-   Replace core servicing stack infrastructure
+
+Kernel integrity is preserved.
+
+Trade-offs & Limitations
+
+Aggressive reduction can introduce limitations.
+
+Depending on edition or build, certain features may be:
+
+-   Removed permanently
+-   Disabled by default
+-   Unavailable without manual restoration
+
+Users should understand that ultra-light configurations may impact:
+
+-   Feature completeness
+-   Long-term update reliability
+-   Compatibility with certain enterprise tools
+-   Edge-case software behavior
+
+Underave prioritizes reduction over completeness.
+
+Relationship to Other Projects
+
+Underave OS is independent in philosophy and direction.
+
+While it may share knowledge or technical foundations with structured
+Windows rebuild projects, its mission is different:
+
+-   Structured projects aim for balance and long-term deployment models.
+-   Underave aims for minimal footprint experimentation.
+
+It exists as a performance laboratory rather than a conservative
+distribution.
+
+Licensing & Legal Notice
+
+Underave OS is built on Microsoft Windows.
+
+A valid Windows license is required for activation and legal usage.
+Underave does not provide, generate, or bypass activation keys.
+
+The project is not affiliated with Microsoft. All Windows trademarks
+belong to Microsoft Corporation.
+
+Users are responsible for complying with licensing regulations in their
+jurisdiction.
+
+No Warranty Statement
+
+Underave OS is provided “as-is”.
+
+There is no guarantee of: - Absolute compatibility with all hardware -
+Suitability for professional production environments - Long-term update
+stability under aggressive reduction models
+
+Users deploy Underave at their own risk and responsibility.
+
+Project Vision
+
+Underave is not built to compete for popularity. It is built to explore
+technical limits.
+
+Its long-term direction includes:
+
+-   Refining minimal Windows deployment concepts
+-   Documenting reduction strategies responsibly
+-   Providing transparency about system changes
+-   Maintaining architectural awareness during optimization
+
+Minimalism should never become recklessness. Performance should never
+ignore system integrity.
+
+Underave exists at the edge — but it does not cross into system
+corruption.
+
+End of Document.
