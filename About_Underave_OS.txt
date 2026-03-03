@@ -13,6 +13,8 @@ enterprise-ready. It is designed to be reduced.
 
 The goal is clarity through subtraction.
 
+─────────────────────────────────────────────
+
 Core Philosophy
 
 Underave follows a strict reduction-first philosophy:
@@ -28,12 +30,14 @@ services are minimized, and consumer-facing layers are stripped down.
 Minimalism is not treated as aesthetic. It is treated as architectural
 discipline.
 
+─────────────────────────────────────────────
+
 Design Objectives
 
 Underave OS focuses on:
 
--   Extremely low idle memory usage
--   Reduced process count
+-   Extremely low idle memory usage (under 1.0 GB)
+-   Reduced process count at idle
 -   Minimal startup overhead
 -   Lower background task density
 -   Clean deployment baseline
@@ -43,6 +47,153 @@ This ensures the operating environment starts from a reduced state
 rather than being modified dynamically at runtime.
 
 Every removal decision is intentional.
+
+─────────────────────────────────────────────
+
+OOBE & DEPLOYMENT
+
+Underave OS ships with OOBE (Out-of-Box Experience) fully skipped.
+
+The system bypasses the standard Windows setup wizard sequence,
+including: account creation prompts, privacy settings screens, Cortana
+configuration, telemetry opt-in dialogs, and Microsoft account
+sign-in requirements.
+
+The system boots directly into a pre-configured desktop environment.
+This results in faster first-boot time and eliminates interactive setup
+dependencies.
+
+Users are expected to have technical familiarity with Windows
+environments before deploying Underave.
+
+─────────────────────────────────────────────
+
+WINDOWS UPDATE — REMOVED
+
+Windows Update is fully removed in Underave OS.
+
+This is a deliberate architectural decision. Automatic update
+infrastructure — including Windows Update Agent services, Update
+Orchestrator, and related background tasks — is stripped at image
+level. This eliminates:
+
+-   Background bandwidth usage from update scanning
+-   Memory overhead from update-related services
+-   Disk usage from staged update packages
+-   Spontaneous reboots and background activity
+
+Trade-off awareness is required:
+
+Removing Windows Update means the system will not receive security
+patches, feature updates, or driver updates through the standard
+channel. Users are solely responsible for maintaining their system
+security posture.
+
+Underave prioritizes footprint reduction over update availability.
+This configuration is intended for advanced users, testing environments,
+and low-resource hardware where update overhead is unacceptable.
+
+─────────────────────────────────────────────
+
+WINDOWS DEFENDER — REMOVED
+
+Windows Defender is fully removed in Underave OS.
+
+Real-time protection, scheduled scans, Windows Security Center, and
+all associated Defender services are stripped at the image level.
+This includes:
+
+-   Windows Defender Antivirus (MsMpEng)
+-   Windows Defender Firewall (managed separately)
+-   Security Health Service
+-   Defender-related scheduled tasks and background agents
+
+Impact on system resources:
+
+Removing Defender eliminates one of the highest-impact background
+processes in Windows. This contributes directly to Underave's sub-1 GB
+idle RAM target and significantly reduces CPU micro-interruptions during
+active workloads.
+
+Security responsibility:
+
+Users must understand that removing Defender eliminates the primary
+built-in protection layer. Underave does not provide an alternative
+security solution. Users deploying Underave on internet-connected
+systems should employ their own security practices and tools.
+
+Underave assumes the user understands and accepts this trade-off.
+
+─────────────────────────────────────────────
+
+IMAGE COMPRESSION
+
+Underave OS applies extreme image-level compression to the WIM/ESD
+deployment package.
+
+The compression strategy includes:
+
+-   Maximum ESD compression at export stage (LZMS algorithm)
+-   Component manifest cleanup and superseded package removal
+-   Deep package trimming before compression pass
+-   Removal of recovery environment components to reduce image size
+-   Elimination of language packs and unused regional data
+
+Result:
+
+The Underave installation image is significantly smaller than a
+standard Windows 11 ISO. Compressed image size reflects aggressive
+pre-removal and DISM-level cleanup before compression is applied.
+
+This is not post-install compression. The image itself is rebuilt at a
+reduced state, then compressed. The installed system maintains its
+reduced footprint without requiring runtime decompression overhead.
+
+─────────────────────────────────────────────
+
+POST-SETUP RECOMMENDATIONS
+
+After deploying Underave OS, the following steps are recommended to
+complete the environment:
+
+1. Driver Installation
+   Install chipset, GPU, network, and audio drivers manually.
+   Windows Update is not available for automatic driver delivery.
+
+2. Visual C++ Redistributables
+   Install the latest Microsoft Visual C++ Redistributable packages
+   (x86 and x64). Many applications and games require these runtimes.
+
+3. DirectX & .NET Runtime
+   Install .NET Desktop Runtime if required by target applications.
+   DirectX components may need manual restoration for some use cases.
+
+4. Browser Installation
+   No browser is included by default. Install your preferred browser
+   manually after deployment.
+
+5. Power Plan Configuration
+   Set the power plan to High Performance or Ultimate Performance
+   for maximum responsiveness on capable hardware.
+
+6. Pagefile Configuration
+   Review and manually configure virtual memory settings based on
+   your available RAM and workload requirements.
+
+7. Security Practices
+   Since Windows Defender and Windows Update are removed, users should:
+   -   Avoid running untrusted executables
+   -   Use the system in isolated or controlled environments when possible
+   -   Apply their own security tooling if required
+
+8. Application Compatibility Testing
+   Some applications may behave unexpectedly due to removed components.
+   Test critical software before committing to Underave as a daily driver.
+
+Post-setup is the user's responsibility. Underave provides the
+reduced baseline. The user builds their environment on top of it.
+
+─────────────────────────────────────────────
 
 Intended Audience
 
@@ -64,6 +215,8 @@ It is not recommended for:
 
 Underave assumes technical awareness.
 
+─────────────────────────────────────────────
+
 Optimization Strategy
 
 Underave applies aggressive optimization strategies, including:
@@ -72,8 +225,11 @@ Underave applies aggressive optimization strategies, including:
 -   Service startup reduction
 -   Consumer feature elimination
 -   Default configuration tuning at deployment stage
--   Reduced background telemetry footprint (where possible within system
-    boundaries)
+-   Reduced background telemetry footprint
+-   Windows Update fully removed at image level
+-   Windows Defender fully removed at image level
+-   OOBE sequence fully bypassed
+-   Maximum ESD/WIM compression applied to deployment image
 
 However, the system does not:
 
@@ -83,6 +239,8 @@ However, the system does not:
 -   Replace core servicing stack infrastructure
 
 Kernel integrity is preserved.
+
+─────────────────────────────────────────────
 
 Trade-offs & Limitations
 
@@ -97,11 +255,14 @@ Depending on edition or build, certain features may be:
 Users should understand that ultra-light configurations may impact:
 
 -   Feature completeness
--   Long-term update reliability
+-   Long-term update reliability (Windows Update removed)
+-   Security coverage (Defender removed)
 -   Compatibility with certain enterprise tools
 -   Edge-case software behavior
 
 Underave prioritizes reduction over completeness.
+
+─────────────────────────────────────────────
 
 Relationship to Other Projects
 
@@ -116,6 +277,8 @@ Windows rebuild projects, its mission is different:
 It exists as a performance laboratory rather than a conservative
 distribution.
 
+─────────────────────────────────────────────
+
 Licensing & Legal Notice
 
 Underave OS is built on Microsoft Windows.
@@ -129,15 +292,21 @@ belong to Microsoft Corporation.
 Users are responsible for complying with licensing regulations in their
 jurisdiction.
 
+─────────────────────────────────────────────
+
 No Warranty Statement
 
-Underave OS is provided “as-is”.
+Underave OS is provided "as-is".
 
-There is no guarantee of: - Absolute compatibility with all hardware -
-Suitability for professional production environments - Long-term update
-stability under aggressive reduction models
+There is no guarantee of:
+-   Absolute compatibility with all hardware
+-   Suitability for professional production environments
+-   Long-term update stability under aggressive reduction models
+-   System security without Defender or Windows Update
 
 Users deploy Underave at their own risk and responsibility.
+
+─────────────────────────────────────────────
 
 Project Vision
 
@@ -156,5 +325,7 @@ ignore system integrity.
 
 Underave exists at the edge — but it does not cross into system
 corruption.
+
+─────────────────────────────────────────────
 
 End of Document.
