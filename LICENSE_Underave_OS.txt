@@ -1,0 +1,145 @@
+════════════════════════════════════════════════════════
+                  UNDERAVE OS LICENSE
+                  Version 1.0 — 2026
+════════════════════════════════════════════════════════
+
+PROJECT DECLARATION
+
+Underave OS is an independent Windows customization and optimization
+project. It is not a product of, affiliated with, endorsed by, or
+officially connected to Microsoft Corporation in any way.
+
+Underave OS is a personal, non-commercial, open experimentation
+project maintained by an independent developer.
+
+────────────────────────────────────────────────────────
+
+1. WINDOWS BASE — MICROSOFT OWNERSHIP
+
+Underave OS is built upon Microsoft Windows 11, which is proprietary
+software owned by Microsoft Corporation.
+
+  - All Windows components, binaries, and associated intellectual
+    property remain the exclusive property of Microsoft Corporation.
+  - Underave OS does not claim ownership over any Microsoft Windows
+    component, trademark, or technology.
+  - "Windows" and "Windows 11" are registered trademarks of
+    Microsoft Corporation.
+
+────────────────────────────────────────────────────────
+
+2. SCOPE OF THIS LICENSE
+
+This license applies to:
+
+  - The Underave OS build configuration and customization layer
+  - Scripts, tools, and automation used in the build process
+  - Documentation, wiki, and project materials authored by the
+    Underave OS developer
+  - The Underave OS project identity, name, and branding
+
+This license does NOT apply to:
+
+  - The underlying Windows operating system components
+  - Third-party tools or software referenced or recommended by
+    this project
+  - Microsoft Activation Scripts (MAS) or any external activation
+    tooling
+
+────────────────────────────────────────────────────────
+
+3. DISTRIBUTION
+
+You MAY:
+
+  - Use Underave OS for personal, educational, or research purposes
+  - Share links to official Underave OS distribution channels
+  - Discuss, document, or review Underave OS publicly
+  - Build upon the project's open build concepts for personal use
+
+You MAY NOT:
+
+  - Repackage, rebrand, or redistribute Underave OS builds as your
+    own project without clear attribution
+  - Sell Underave OS or charge users for access to its builds
+  - Claim official affiliation with Underave OS without permission
+  - Misrepresent Underave OS as a product of Microsoft Corporation
+
+────────────────────────────────────────────────────────
+
+4. NO WARRANTY
+
+Underave OS is provided "as-is" without warranty of any kind,
+express or implied.
+
+The developer of Underave OS makes no guarantees regarding:
+
+  - Hardware compatibility
+  - Suitability for any particular purpose
+  - Long-term system stability
+  - Security under aggressive reduction configurations
+  - Compatibility with all third-party software
+
+Users deploy and use Underave OS entirely at their own risk.
+
+The developer is not liable for any data loss, hardware damage,
+system instability, or security incidents arising from the use
+of Underave OS.
+
+────────────────────────────────────────────────────────
+
+5. LEGAL COMPLIANCE
+
+Users of Underave OS are solely responsible for:
+
+  - Complying with Microsoft's Windows licensing terms
+  - Complying with applicable software laws in their jurisdiction
+  - Ensuring lawful use of all software installed on top of
+    Underave OS
+
+This project does not provide legal advice. If you are uncertain
+about licensing requirements in your region, consult a qualified
+legal professional.
+
+────────────────────────────────────────────────────────
+
+6. THIRD-PARTY TOOLS & REFERENCES
+
+Underave OS may reference or recommend third-party tools for
+post-setup configuration (e.g., drivers, runtimes, browsers).
+
+These tools are:
+  - Not bundled within Underave OS unless explicitly stated
+  - Subject to their own respective licenses and terms
+  - The responsibility of the user to evaluate before use
+
+Underave OS does not take responsibility for third-party software
+recommended or referenced in its documentation.
+
+────────────────────────────────────────────────────────
+
+7. PROJECT IDENTITY
+
+"Underave OS" is the name of this independent project.
+
+Unauthorized rebranding, impersonation, or misrepresentation of
+this project is not permitted.
+
+────────────────────────────────────────────────────────
+
+SUMMARY (Plain Language)
+
+  - Underave OS is an independent project, not made by Microsoft.
+  - Windows is Microsoft's property. A real license is required.
+  - Activation is not included. Users handle it themselves.
+  - Use Underave OS freely for personal and research use.
+  - Don't resell or rebrand it as your own.
+  - No warranty. Deploy at your own risk.
+
+════════════════════════════════════════════════════════
+
+             © 2026 Underave OS — Independent Project
+          Built on Microsoft Windows — Not affiliated with
+                      Microsoft Corporation.
+
+════════════════════════════════════════════════════════
