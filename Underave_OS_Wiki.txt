@@ -1,0 +1,483 @@
+════════════════════════════════════════════════════════
+                    UNDERAVE OS WIKI
+             The Ultra-Light Windows Rebuild
+════════════════════════════════════════════════════════
+
+Table of Contents
+
+  1.  Introduction
+  2.  Project Philosophy
+  3.  Relationship to NuxOS
+  4.  System Architecture
+  5.  Technical Overview
+  6.  Optimization Model
+  7.  OOBE & First Boot
+  8.  Windows Update — Removed
+  9.  Windows Defender — Removed
+  10. Image Compression
+  11. Installation Guide
+  12. Post-Setup Recommendations
+  13. Performance Characteristics
+  14. Component Removal Policy
+  15. Security Model
+  16. Limitations & Trade-offs
+  17. Intended Audience
+  18. Community Guidelines
+  19. Licensing & Legal
+  20. No Warranty Statement
+
+════════════════════════════════════════════════════════
+
+1. INTRODUCTION
+
+Underave OS is an experimental ultra-light Windows 11 rebuild focused
+on extreme minimalism, aggressive system reduction, and architectural
+discipline.
+
+It is designed as a technical exploration into how lightweight a modern
+Windows environment can become while still remaining functional,
+deployable, and kernel-stable.
+
+Underave is not a daily driver for general users.
+Underave is not an enterprise solution.
+Underave is not a balanced distribution.
+
+Underave is a reduction-first operating environment built for advanced
+users, system experimenters, and performance enthusiasts.
+
+The goal: clarity through subtraction.
+
+Idle RAM target: under 1.0 GB.
+
+════════════════════════════════════════════════════════
+
+2. PROJECT PHILOSOPHY
+
+Underave operates under one rule:
+
+    Remove everything non-essential.
+    Preserve only what enables core functionality.
+
+Minimalism in Underave is not cosmetic. It is treated as architectural
+discipline — a deliberate engineering choice made at every level of the
+build process.
+
+Unlike projects that aim for balance, Underave deliberately pushes
+boundaries. It asks: how far can the system be reduced without
+crossing into instability or kernel corruption?
+
+The answer defines every build decision.
+
+Minimalism should never become recklessness.
+Performance should never ignore system integrity.
+
+Underave exists at the edge — but does not cross it.
+
+════════════════════════════════════════════════════════
+
+3. RELATIONSHIP TO NUXOS
+
+Underave OS is a separate and independent project from NuxOS.
+
+NuxOS is a structured Windows ecosystem with multiple editions —
+Server, Enterprise, Workstation, Gaming — focused on long-term
+stability, balanced performance, and community reliability.
+
+Underave follows a different philosophy entirely:
+
+  NuxOS    → Structured. Stable. Balanced. Multi-edition ecosystem.
+  Underave → Experimental. Minimal. Aggressive reduction. Single focus.
+
+Underave exists as a performance laboratory.
+NuxOS exists as a production-grade Windows platform.
+
+They may share technical knowledge but differ in mission and scope.
+
+════════════════════════════════════════════════════════
+
+4. SYSTEM ARCHITECTURE
+
+Underave is built from an official Microsoft Windows 11 base image.
+
+Core preserved architecture:
+  - Unmodified Windows kernel
+  - Preserved driver infrastructure
+  - Maintained servicing stack base
+  - Kernel integrity enforcement
+  - Driver signature enforcement
+
+The build process:
+  - Source image verification
+  - Controlled package and component removal using DISM
+  - Service configuration reduction
+  - Default policy and registry tuning
+  - OOBE configuration and bypass
+  - Defender removal pass
+  - Update infrastructure removal pass
+  - Maximum ESD compression and image validation
+
+The system is rebuilt at image level — not patched after installation.
+The reduced state is the starting state.
+
+════════════════════════════════════════════════════════
+
+5. TECHNICAL OVERVIEW
+
+Key technical attributes of Underave OS:
+
+  - Idle RAM usage: under 1.0 GB
+  - Process count at idle: significantly reduced vs. stock Windows 11
+  - Startup services: minimized
+  - Consumer applications: stripped
+  - Telemetry: reduced within system boundaries
+  - Windows Update: fully removed
+  - Windows Defender: fully removed
+  - OOBE: fully bypassed
+  - Image compression: maximum ESD (LZMS)
+
+What Underave does NOT do:
+  - Modify Windows kernel binaries
+  - Bypass Windows activation mechanisms
+  - Break driver signature enforcement
+  - Replace the core servicing stack
+
+════════════════════════════════════════════════════════
+
+6. OPTIMIZATION MODEL
+
+Underave applies the following optimization strategies at build time:
+
+  - Deep component trimming via DISM
+  - Background service startup rationalization
+  - Scheduled task cleanup and disablement
+  - Startup sequence simplification
+  - Consumer feature and UWP app removal
+  - Default configuration tuning at deployment stage
+  - Defender infrastructure removal
+  - Windows Update infrastructure removal
+  - OOBE bypass via unattend configuration
+  - Maximum image compression before distribution
+
+All removal decisions are intentional.
+No component is removed without consideration of downstream impact.
+Aggressive removal is applied carefully to avoid system corruption.
+
+════════════════════════════════════════════════════════
+
+7. OOBE & FIRST BOOT
+
+Underave OS ships with OOBE (Out-of-Box Experience) fully skipped.
+
+The standard Windows setup wizard is bypassed entirely, including:
+  - Account creation prompts
+  - Microsoft account sign-in requirements
+  - Privacy settings and telemetry opt-in dialogs
+  - Cortana configuration
+  - Region and keyboard setup screens
+
+The system boots directly into a pre-configured desktop environment.
+
+Result:
+  - Faster first-boot time
+  - No interactive setup dependency
+  - No forced Microsoft account requirement
+
+Users are expected to have technical familiarity with Windows
+environments before deploying Underave.
+
+════════════════════════════════════════════════════════
+
+8. WINDOWS UPDATE — REMOVED
+
+Windows Update is fully removed in Underave OS.
+
+Removed infrastructure includes:
+  - Windows Update Agent (wuauserv)
+  - Update Orchestrator Service
+  - Update-related scheduled tasks
+  - Background Intelligent Transfer Service (BITS) dependencies
+  - Staged update package storage
+
+Why it was removed:
+  - Eliminates background bandwidth consumption from update scanning
+  - Removes significant memory overhead from update-related services
+  - Prevents spontaneous background disk and CPU activity
+  - Eliminates unplanned reboots
+  - Reduces installed footprint
+
+Trade-off:
+  The system will not receive security patches, feature updates, or
+  driver updates through standard Windows channels.
+
+  Users are solely responsible for their system's security posture.
+
+This configuration targets: advanced users, test environments, isolated
+hardware, and low-resource systems where update overhead is unacceptable.
+
+════════════════════════════════════════════════════════
+
+9. WINDOWS DEFENDER — REMOVED
+
+Windows Defender is fully removed in Underave OS.
+
+Removed components include:
+  - Windows Defender Antivirus (MsMpEng.exe)
+  - Security Health Service
+  - Windows Defender scheduled scan tasks
+  - Security Center reporting infrastructure
+  - Defender-related background agents
+
+Why it was removed:
+  MsMpEng is one of the highest-impact background processes in Windows.
+  Its removal directly contributes to Underave's sub-1 GB idle RAM
+  target and reduces CPU micro-interruptions during active workloads.
+
+Security responsibility:
+  Removing Defender eliminates the primary built-in protection layer.
+  Underave does not provide an alternative security solution.
+
+  Users deploying Underave on internet-connected systems must apply
+  their own security practices.
+
+Underave assumes the user fully understands and accepts this trade-off.
+
+════════════════════════════════════════════════════════
+
+10. IMAGE COMPRESSION
+
+Underave OS applies extreme image-level compression to the deployment
+package before distribution.
+
+Compression strategy:
+  - Maximum ESD compression using LZMS algorithm at export stage
+  - Component manifest cleanup (superseded packages removed)
+  - Deep DISM package trimming before compression pass
+  - Recovery environment removed to reduce image footprint
+  - Unused language packs and regional data eliminated
+
+Result:
+  The Underave distribution image is significantly smaller than a
+  standard Windows 11 ISO.
+
+Important:
+  This is not post-install runtime compression.
+  The image is rebuilt in a reduced state, then compressed.
+  The installed system maintains its lightweight footprint natively.
+  No decompression overhead is introduced at runtime.
+
+════════════════════════════════════════════════════════
+
+11. INSTALLATION GUIDE
+
+Minimum Requirements:
+  - 64-bit CPU
+  - 2 GB RAM (4 GB recommended for comfortable use)
+  - 32 GB storage minimum
+  - UEFI firmware recommended
+
+Installation Steps:
+  1. Download the official Underave OS ISO.
+  2. Create a bootable USB using Rufus or Ventoy.
+  3. Boot from USB (disable Secure Boot if required).
+  4. Perform a clean installation on target drive.
+  5. System will bypass OOBE and boot directly to desktop.
+  6. Install drivers manually (see Post-Setup section).
+  7. Configure your environment.
+
+Clean installs are strongly recommended.
+Upgrading from stock Windows is not supported.
+
+════════════════════════════════════════════════════════
+
+12. POST-SETUP RECOMMENDATIONS
+
+After deploying Underave OS, complete the following steps:
+
+  1. Driver Installation
+     Install chipset, GPU, network, and audio drivers manually.
+     Windows Update is unavailable for automatic driver delivery.
+
+  2. Visual C++ Redistributables
+     Install the latest Microsoft Visual C++ Redistributable packages
+     (x86 and x64). Required by most applications and games.
+
+  3. DirectX & .NET Runtime
+     Install .NET Desktop Runtime if required by target applications.
+     DirectX components may need manual restoration for some software.
+
+  4. Browser
+     No browser is included. Install your preferred browser manually.
+
+  5. Power Plan
+     Set to High Performance or Ultimate Performance for best results.
+
+  6. Pagefile (Virtual Memory)
+     Manually configure virtual memory based on your RAM and workload.
+
+  7. Security Practices
+     With Defender and Windows Update removed:
+     - Avoid running untrusted executables
+     - Use in isolated environments when possible
+     - Apply your own security tooling if required
+
+  8. Application Compatibility Testing
+     Some software may behave unexpectedly due to removed components.
+     Test critical applications before committing Underave as daily use.
+
+Post-setup is the user's responsibility.
+Underave provides the reduced baseline. The user builds on top of it.
+
+════════════════════════════════════════════════════════
+
+13. PERFORMANCE CHARACTERISTICS
+
+Underave typically demonstrates:
+
+  - Idle RAM usage: under 1.0 GB (clean boot, no extra apps)
+  - Process count: significantly lower than stock Windows 11
+  - Background CPU activity: minimal
+  - Cold boot time: faster than standard Windows 11
+  - Disk activity at idle: near zero
+  - Defender scan overhead: eliminated
+  - Update background overhead: eliminated
+
+Actual performance depends on hardware configuration and installed
+applications.
+
+════════════════════════════════════════════════════════
+
+14. COMPONENT REMOVAL POLICY
+
+Components are removed if they meet one or more criteria:
+
+  - Consumer-focused features not required for core operation
+  - Redundant bundled applications
+  - Telemetry and reporting services (where removable)
+  - Optional frameworks unused in a minimal deployment
+  - Background agents with significant resource overhead
+
+Critical infrastructure is always preserved:
+  - Windows kernel and HAL
+  - Driver framework and WDM stack
+  - Core runtime libraries (MSVCRT, etc.)
+  - NTFS and storage subsystem
+  - Core networking stack
+
+Underave does not blindly remove dependencies.
+Every removal is evaluated for downstream impact before inclusion.
+
+════════════════════════════════════════════════════════
+
+15. SECURITY MODEL
+
+Underave preserves:
+  - Kernel integrity (PatchGuard remains active)
+  - Driver signature enforcement
+  - Core NTFS access control structures
+  - Virtualization support (where not intentionally removed)
+
+Underave removes:
+  - Windows Defender (see Section 9)
+  - Windows Update (see Section 8)
+
+The project does not:
+  - Modify kernel binaries
+  - Bypass activation
+  - Tamper with driver signing
+  - Disable kernel security boundaries
+
+Security is not bypassed for the sake of minimalism.
+Performance never justifies compromising kernel trust boundaries.
+
+Users are responsible for their own security posture when deploying
+a system without Defender or Update infrastructure.
+
+════════════════════════════════════════════════════════
+
+16. LIMITATIONS & TRADE-OFFS
+
+Because Underave prioritizes reduction, users should expect:
+
+  - No Windows Update (no security patches, no driver updates)
+  - No Windows Defender (no built-in antivirus or real-time protection)
+  - Some features may be permanently removed
+  - Certain removed components cannot be restored without reinstalling
+  - Reduced compatibility with niche enterprise tools
+  - Not suitable for mission-critical or production environments
+  - Edge-case software may behave unexpectedly
+  - No long-term update stability guarantee
+
+Underave prioritizes reduction over completeness.
+Users deploy at their own discretion and risk.
+
+════════════════════════════════════════════════════════
+
+17. INTENDED AUDIENCE
+
+Underave OS is designed for:
+
+  - Advanced users and system experimenters
+  - Performance enthusiasts
+  - Minimalist hardware setups and low-RAM configurations
+  - Virtual machine environments
+  - Testing and lab deployments
+  - Developers evaluating minimal Windows baselines
+
+Underave is NOT recommended for:
+
+  - General everyday users
+  - Enterprise or production environments
+  - Mission-critical infrastructure
+  - Users unfamiliar with manual driver installation
+  - Users unfamiliar with system recovery procedures
+
+Underave assumes technical awareness and informed deployment.
+
+════════════════════════════════════════════════════════
+
+18. COMMUNITY GUIDELINES
+
+The Underave community operates under these principles:
+
+  - Respectful and constructive technical discussion
+  - No piracy, activation bypass, or crack discussions
+  - No unauthorized repackaging or rebranding of Underave builds
+  - Responsible bug reporting with system details
+  - Informed experimentation — understand the risks before deploying
+
+Users are expected to understand system-level implications before
+deploying Underave in any environment.
+
+════════════════════════════════════════════════════════
+
+19. LICENSING & LEGAL
+
+Underave OS is built on Microsoft Windows 11.
+
+  - A valid Windows license is required for activation and legal use.
+  - Underave does not provide, generate, or bypass activation keys.
+  - The project is not affiliated with Microsoft Corporation.
+  - All Windows trademarks belong to Microsoft Corporation.
+  - Users are responsible for license compliance in their jurisdiction.
+
+════════════════════════════════════════════════════════
+
+20. NO WARRANTY STATEMENT
+
+Underave OS is provided "as-is" without warranty of any kind.
+
+There is no guarantee of:
+  - Absolute hardware compatibility
+  - Suitability for professional or production environments
+  - Long-term system stability under aggressive reduction models
+  - Security coverage without Defender or Windows Update
+  - Compatibility with all third-party applications
+
+Users deploy Underave entirely at their own risk and responsibility.
+
+════════════════════════════════════════════════════════
+
+                    End of Wiki Document.
+          Underave OS — The edge of reduction.
+
+════════════════════════════════════════════════════════
