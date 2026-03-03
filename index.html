@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Underave OS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url('https://images.hdqwalls.com/wallpapers/windows-server-2025-rm.jpg') center/cover no-repeat;
+      filter: blur(6px) brightness(0.45);
+      transform: scale(1.05);
+      z-index: 0;
+    }
+
+    /* Content */
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      max-width: 900px;
+      width: 100%;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 650px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      text-align: left;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      background: rgba(255,255,255,0.11);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    /* Buttons */
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 0.65rem 1.8rem;
+      background: #38bdf8;
+      color: #0a0f1a;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.2s;
+      box-shadow: 0 0 20px rgba(56,189,248,0.35);
+    }
+
+    .btn-download:hover {
+      background: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(56,189,248,0.55);
+    }
+
+    .btn-link {
+      display: inline-block;
+      padding: 0.65rem 1.2rem;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.88rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+
+    .btn-link:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+
+  <div class="content">
+    <h1>Underave OS</h1>
+    <p class="tagline">The lightest Windows 11 experience — built for every PC.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>⚡ Extreme Lightweight</h3>
+        <p>Idle RAM under 1.0 GB. Stripped of bloat while keeping full Windows compatibility and stability.</p>
+      </div>
+      <div class="card">
+        <h3>🎮 Full Game Compatibility</h3>
+        <p>Kernel-level anti-cheat systems work out of the box. Play competitive games without issues.</p>
+      </div>
+      <div class="card">
+        <h3>🧹 Clean by Default</h3>
+        <p>No telemetry. No unnecessary background services. Just a clean, fast Windows 11 foundation.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="https://drive.google.com/file/d/1p4qSM_EVRLHxKzc0RebjgrlIFrGS1V5P/view?usp=sharing" class="btn-download" target="_blank">
+        Download Underave OS
+      </a>
+      <a href="https://nuxos-dev.github.io" class="btn-link">← Back to NuxOS</a>
+    </div>
+  </div>
+
+</body>
+</html>
